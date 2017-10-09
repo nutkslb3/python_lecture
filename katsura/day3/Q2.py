@@ -1,4 +1,4 @@
-str = "I am a PERFECT HUMAN
-words = time.sprit(" ")
-print words
+str1 = "I am a PERFECT HUMAN"
+words = str1.split(" ")
+print(words)
 
