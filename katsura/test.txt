@@ -1,1 +1,6 @@
 このテキストファイルを使ってGitの練習をしましょう．
+my name is katsura yuta
+I like "moe anime"
+I grad to get along
+thank you!
+
