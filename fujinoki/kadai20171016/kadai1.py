@@ -14,14 +14,13 @@ def main():
 
     counted_dict = {}
     for item in fruits:
-        if not item in counted_dict:
+        if item not in counted_dict:
              counted_dict[item] = 0
         counted_dict[item] += 1
     print (counted_dict)
 
     counted_length = {}
     for item in fruits:
-        if not item in counted_length:
              counted_length[item] = len(item)
     print (counted_length)
     print (sorted(counted_length.items(), key = lambda x:-x[1]))  	
