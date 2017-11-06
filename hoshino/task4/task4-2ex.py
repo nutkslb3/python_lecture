@@ -5,7 +5,7 @@ import codecs
 import csv
 
 def main():
-    fin = codecs.open("./data.txt", "rb", "utf-8")
+    fin = codecs.open("./data.csv", "rb", "utf-8")
     try:
         reader = csv.reader(fin)
         for row in reader:
