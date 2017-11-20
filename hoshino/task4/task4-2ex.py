@@ -5,11 +5,14 @@ import codecs
 import csv
 
 def main():
-    fin = codecs.open("./data.csv", "rb", "utf-8")
     try:
+        fin = codecs.open("./data.csv", "rb", "utf-8")
         reader = csv.reader(fin)
         for row in reader:
             ",".join(row)  
+    except IOError as e:
+        print("ファイルが開けません")
+        sys.exit()
     finally:
         fin.close()
     str  = row[0].split("-")
