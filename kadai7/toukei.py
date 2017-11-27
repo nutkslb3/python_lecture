@@ -33,20 +33,20 @@ class Statman:
 
     def q10(self, summale, sumfemale):
         malem =mean(summale)
-        melevar = variance(summale)
-        melestd = stdev(summale)
+        malevar = variance(summale)
+        malestd = stdev(summale)
 
         femalem =mean(sumfemale)
-        femelevar = variance(sumfemale)
-        femelestd = stdev(sumfemale)
+        femalevar = variance(sumfemale)
+        femalestd = stdev(sumfemale)
 
         print("学年全体の男子の合計得点の平均:{0}".format(malem))
         print("学年全体の男子の合計得点の分散:{0}".format(malevar))
         print("学年全体の男子の合計得点の標準偏差:{0}".format(malestd))
 
-        print("学年全体の合計得点の平均:{0}".format(femalem))
-        print("学年全体の合計得点の分散:{0}".format(femalevar))
-        print("学年全体の合計得点の標準偏差:{0}".format(femalestd))
+        print("学年全体の女子の合計得点の平均:{0}".format(femalem))
+        print("学年全体の女子の合計得点の分散:{0}".format(femalevar))
+        print("学年全体の女子の合計得点の標準偏差:{0}".format(femalestd))
 
 if __name__ == '__main__':
     stat = Statman()
