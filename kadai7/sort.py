@@ -1,18 +1,14 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+
+
 class sortman: 
 
     def q5(self,sum11, sum12):
-        sum11.sort()
-
-        sum11.reverse()
-
-        sum12.sort()
-
-        sum12.reverse()
+        sum11.sort(reverse=True)
+        sum12.sort(reverse=True)
 
         print('1組クラス別ソート' + str(sum11))
-
         print('2組クラス別ソート' + str(sum12))
 
     def q6(self,sum):
