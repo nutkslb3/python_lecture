@@ -4,25 +4,38 @@
 
 class sortman: 
 
-    def q5(self,sum11, sum12):
-        sum11.sort(reverse=True)
-        sum12.sort(reverse=True)
+    def q5(self, classroom):
+        students = classroom.student_list
+        students.sort(reverse=True, key=lambda x: x.total)
+        
+        return(students)
 
-        print('1組クラス別ソート' + str(sum11))
-        print('2組クラス別ソート' + str(sum12))
+    def q6(self, classroom1, classroom2):
+        students = []
+        students.extend(classroom1.student_list)
+        students.extend(classroom2.student_list)
+        students.sort(reverse=True, key=lambda x: x.total)
+        
+        return(students)
 
-    def q6(self,sum):
-        sum.sort()
-        sum.reverse()
+    def q7(self, classroom1, classroom2):
+        student_m = []
+        student_f = []
+        for student in classroom1.student_list:
+            if student.fm == "M":
+                student_m.append(student)
+            else:
+                student_f.append(student)
 
-        print('学年ソート' + str(sum))
-	
-    def q7(self,sum1,sum2):
-        sum1.sort()
-        sum1.reverse()
+        for student in classroom2.student_list:
+            if student.fm == "M":
+                student_m.append(student)
+            else:
+                student_f.append(student)
 
-        sum2.sort()
-        sum2.reverse()
-
-        print('男子ソート' + str(sum1))
-        print('女子ソート' + str(sum2))
+        
+        student_m.sort(reverse=True, key=lambda x: x.total)
+        student_f.sort(reverse=True, key=lambda x: x.total)
+        
+        return([student_m, student_f])
+ 

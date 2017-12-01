@@ -54,6 +54,7 @@ def main():
     classroom1=read_csv("1-1.csv")
     classroom2=read_csv("1-2.csv")
 
+    # Q2~3
     Q2 = Q2_Q4.Q2Q4()
 
     # １組の最高得点
@@ -72,12 +73,44 @@ def main():
     print("全体の最高点")
     print_Q2(grade_max)
 
-    #学年全体の男女別の最高点
+    # 学年全体の男女別の最高点
     grade_max_list = Q2.get_MF(class1_max["total"])
     print("男子の最高点", end='\n')
     print_Q2(grade_max_list[0])
     print("女子の最高点", end='\n')
     print_Q2(grade_max_list[1])
+
+    # Q5~6
+    Q5 = sort.sortman()
+    print("各クラスの合計点ソート")
+    # Q5 各クラス合計点でソート（Q3の処理でソートしちゃってるからそれを使ってもいいけど．．．）
+    class_list = [classroom1, classroom2]
+    for i, c in enumerate(class_list):
+        students = Q5.q5(c)
+        print(str(i+1) + "組")
+        for student in students:
+            print(str(student.total) + "点\t" + student.name + "さん")
+        print("")
+
+    # Q6 学年全体の合計得点でソート
+    students = Q5.q6(classroom1, classroom2)
+    print("Q6 全体の合計点ソート")
+    for student in students:
+        print(str(student.total) + "点\t" + student.name + "さん")
+    print("")
+
+    # Q7 男女別ソート
+    students_list = Q5.q7(classroom1, classroom2)
+    print("Q7 男女別の合計点ソート")
+    for i, students in enumerate(students_list):
+        if i == 0:
+            print("男子")
+        else:
+            print("女子")
+        for student in students:
+            print(str(student.total) + "点\t" + student.name + "さん")
+        
+
 
     '''
     kadai7_q2 = Q2_Q4.yomikomi()
