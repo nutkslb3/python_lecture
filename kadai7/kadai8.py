@@ -48,7 +48,6 @@ def main():
     mio = read_txt("mio.txt")
     taro = read_txt("taro.txt")
     q2() 
-
     print ("")
     print (mio.name)
     print (mio.class_)
@@ -56,8 +55,8 @@ def main():
     q5(mio.mailaddress)
     q6(mio.address)
     q7(mio.url)
-    q8(mio.txt)    
-
+    q8(mio.profile)
+    q9("mio.txt")    
     print ("")   
     print (taro.name)
     print (taro.class_)
@@ -65,7 +64,8 @@ def main():
     q5(taro.mailaddress) 
     q6_t(taro.address)
     q7_t(taro.url)
-    q8(taro.txt)
+    q8(taro.profile)
+    q9("taro.txt")
 
 def q2():
     read = kadai7.readFile()
@@ -152,9 +152,17 @@ def q8(profile):
              keywords.append(node.surface)
         node = node.next
     print (keywords)
-
-def q9(filename):
     
+def q9(filename):
+    m = MeCab.Tagger()
+    f = open(filename,'r')
+    for line in f:
+        node = m.parseToNode(line)
+        while node:
+            if node.feature.split(',')[0] != '名詞' and node.feature.split(',')[0] != '動詞':
+                print(node.surface)
+            node = node.next
+    f.close()
 
 if __name__ == '__main__':
     main()
