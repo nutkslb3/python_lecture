@@ -6,6 +6,7 @@ from statistics import mean, variance, stdev
 class Statman:
 
     def q8(self, sum11, sum12):
+        m = []
         m1 = mean(sum11)
         var1 = variance(sum11)
         std1 = stdev(sum11)
@@ -14,15 +15,26 @@ class Statman:
         var2 = variance(sum12)
         std2 = stdev(sum12)
 
-        print("1-1の合計得点の平均:{0}".format(m1))
-        print("1-1の合計得点の分散:{0}".format(var1))
-        print("1-1の合計得点の標準偏差:{0}".format(std1))
+        ##print("1-1の合計得点の平均:{0}".format(m1))
+        ##print("1-1の合計得点の分散:{0}".format(var1))
+        ##print("1-1の合計得点の標準偏差:{0}".format(std1))
 
-        print("1-2の合計得点の平均:{0}".format(m2))
-        print("1-2の合計得点の分散:{0}".format(var2))
-        print("1-2の合計得点の標準偏差:{0}".format(std2))
+        ##print("1-2の合計得点の平均:{0}".format(m2))
+        ##print("1-2の合計得点の分散:{0}".format(var2))
+        ##print("1-2の合計得点の標準偏差:{0}".format(std2))
+        
+        m.append(format(m1))
+        m.append(format(var1))
+        m.append(format(std1))
+
+        m.append(format(m2))
+        m.append(format(var2))
+        m.append(format(std2))
+        return (m)
+
 
     def q9(self, sum):
+        ans = []
         m = mean(sum)
         var = variance(sum)
         std = stdev(sum)
@@ -31,6 +43,8 @@ class Statman:
         print("学年全体の合計得点の分散:{0}".format(var))
         print("学年全体の合計得点の標準偏差:{0}".format(std))
 
+        
+        
     def q10(self, summale, sumfemale):
         malem =mean(summale)
         malevar = variance(summale)

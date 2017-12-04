@@ -23,32 +23,34 @@ class Classroom(object):
         self.teacher_name = None
         self.teacher_fm = None
 
-def read_csv(filename):
-    students1 = []
-    f = open(filename,"r")##ファイルを開く
-    dataReader1 = csv.reader(f)##データの読み込み
-    header = next(dataReader1)##一行目の読み込み
-    teacher = next (dataReader1)##教師データの読み込み
-    for row in dataReader1:
-        student = Student()
-        student.student_id = row[0]##生徒の名簿番号
-        student.name = row[1]##生徒の名前
-        student.math = row[2]##数学の点数
-        student.japanese = row[3]##国語の点数
-        student.fm = row[4]##性別
-        students1.append(student)
-    f.close()
-    classroom1 = Classroom()
-    classroom1.student_list = students1
-    classroom1.grade = filename[0:1]##学年
-    classroom1.class_id = filename[2:3]##クラス番号
-    classroom1.teacher_name = teacher[1]##担任の名前
-    classroom1.teacher_fm = teacher[4]##担任の性別
-    return classroom1
+class readFile:
+    def read_csv(self,filename):
+        students1 = []
+        f = open(filename,"r")##ファイルを開く
+        dataReader1 = csv.reader(f)##データの読み込み
+        header = next(dataReader1)##一行目の読み込み
+        teacher = next (dataReader1)##教師データの読み込み
+        for row in dataReader1:
+            student = Student()
+            student.student_id = row[0]##生徒の名簿番号
+            student.name = row[1]##生徒の名前
+            student.math = row[2]##数学の点数
+            student.japanese = row[3]##国語の点数
+            student.fm = row[4]##性別
+            students1.append(student)
+        f.close()
+        classroom1 = Classroom()
+        classroom1.student_list = students1
+        classroom1.grade = filename[0:1]##学年
+        classroom1.class_id = filename[2:3]##クラス番号
+        classroom1.teacher_name = teacher[1]##担任の名前
+        classroom1.teacher_fm = teacher[4]##担任の性別
+        return classroom1
     
 def main():
-    classroom1=read_csv("1-1.csv")
-    classroom2=read_csv("1-2.csv")
+    read = readFile()
+    classroom11=read.read_csv("1-1.csv")
+    classroom12=read.read_csv("1-2.csv")
     kadai7_q2 = Q2_Q4.yomikomi()
     kadai7_q2.q2()
     kadai7_q5 = sort.sortman() 
