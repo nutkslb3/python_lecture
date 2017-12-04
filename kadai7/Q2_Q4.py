@@ -45,14 +45,10 @@ def read_csv(filename):
     classroom1.teacher_fm = teacher[4]
     return classroom1
  
-def main():
-    classroom1 = read_csv("1-1.csv") #1組のデータを読み込み
-    classroom2 = read_csv("1-2.csv") #2組のデータを読み込み
-    
 class yomikomi:
-    def q2(self):
-        classroom1 = read_csv("1-1.csv") #1組のデータを読み込み
-        classroom2 = read_csv("1-2.csv") #2組のデータを読み込み
+    def get11Max(self):
+        #1組のデータを読み込み
+        classroom1 = read_csv("1-1.csv")
 
         #1組のデータ
         math1 = 0   #個人の数学得点
@@ -67,20 +63,6 @@ class yomikomi:
 
         s1 = ""     #性別
         stu1 = ""   #生徒
-
-        #2組のデータ
-        math2 = 0   #個人の数学得点
-        jpn2 = 0    #個人の国語得点
-        total2 = 0  #個人の合計得点
-        maxm2 = 0   #数学の最高得点
-        maxj2 = 0   #国語の最高得点
-        maxs2 = 0   #合計の最高得点
-        stum2 = []  #数学最高得点者
-        stuj2 = []  #国語最高得点者
-        stus2 = []  #合計最高得点者
-
-        s2 = ""     #性別
-        stu2 = ""   #生徒
 
         #学年男女別のデータ
         stuam = []    #学年全体男子の名簿リスト
@@ -142,25 +124,57 @@ class yomikomi:
             if maxs1 < total1 or maxs1 == total1:
                 maxs1 = total1
 
-        for j in range(int(classroom1.student_list[19].student_id)):
-            math1 = int(classroom1.student_list[j].math)
-            jpn1 = int(classroom1.student_list[j].japanese)
-            total1 = math1 + jpn1
+        return maxs1
 
-            if math1 == maxm1:
-                stum1.append(classroom1.student_list[j].name)
+    def get12Max(self):
+        classroom2 = read_csv("1-2.csv") #2組のデータを読み込み
+       
+        #2組のデータ
+        math2 = 0   #個人の数学得点
+        jpn2 = 0    #個人の国語得点
+        total2 = 0  #個人の合計得点
+        maxm2 = 0   #数学の最高得点
+        maxj2 = 0   #国語の最高得点
+        maxs2 = 0   #合計の最高得点
+        stum2 = []  #数学最高得点者
+        stuj2 = []  #国語最高得点者
+        stus2 = []  #合計最高得点者
 
-            if jpn1 == maxj1:
-                stuj1.append(classroom1.student_list[j].name)
+        s2 = ""     #性別
+        stu2 = ""   #生徒
 
-            if total1 == maxs1:
-                stus1.append(classroom1.student_list[j].name)
+        #学年男女別のデータ
+        stuam = []    #学年全体男子の名簿リスト
+        mathM = []    #男子の数学得点リスト
+        jpnM = []     #男子の国語得点リスト
+        totalM = []   #男子の合計得点リスト
+        stumM = []    #男子の数学最高得点者
+        stujM = []    #男子の国語最高得点者
+        stusM = []    #男子の合計最高得点者
 
-        print('1組')
-        print('数学最高得点者：'+str(stum1))
-        print('国語最高得点者：'+str(stuj1))
-        print('合計最高得点者：'+str(stus1))
-        print('')
+        mathm = 0     #各男子生徒の数学得点
+        jpnm = 0      #各男子生徒の国語得点
+        totalm = 0    #各男子生徒の合計得点
+        maxMathM = 0  #男子の数学最高得点
+        maxJpnM = 0   #男子の国語最高得点
+        maxTotalM = 0 #男子の最高合計得点
+
+        stuaf = []    #学年全体女子の名簿リスト
+        mathF = []    #女子の数学得点リスト
+        jpnF = []     #女子の国語得点リスト
+        totalF = []   #女子の合計得点リスト
+        stumF = []    #女子の数学最高得点者
+        stujF = []    #女子の国語最高得点者
+        stusF = []    #女子の最高合計得点者
+
+        mathf = 0     #各女子生徒の数学得点
+        jpnf = 0      #各女子生徒の国語得点
+        totalf = 0    #各女子生徒の合計得点
+        maxMathF = 0  #女子の数学最高得点  
+        maxJpnF = 0   #女子の国語最高得点
+        maxTotalF = 0 #女子の最高合計得点
+
+
 
         #2組の最高得点者導出
         for i in range(int(classroom2.student_list[17].student_id)):
@@ -202,95 +216,9 @@ class yomikomi:
                 stuj2.append(classroom2.student_list[j].name)
 
             if total2 == maxs2:
-                stus2.append(classroom2.student_list[j].name)    
+                stus2.append(classroom2.student_list[j].name)
 
-        print('2組')
-        print('数学最高得点者：'+str(stum2))
-        print('国語最高得点者：'+str(stuj2))
-        print('合計最高得点者：'+str(stus2))
-        print('')
-
-        #学年全体の最高得点者導出
-        print('学年全体')
-        if maxm1 > maxm2:
-            print('数学学年最高得点者：'+str(stum1))
-        elif maxm2 > maxm1:
-            print('数学学年最高得点者：'+str(stum2))
-
-        if maxj1 > maxj2:
-            print('国語学年最高得点者：'+str(stuj1))
-        elif maxj2 > maxj1:
-            print('国語学年最高得点者：'+str(stuj2))
-
-        if maxs1 > maxs2:
-            print('合計学年最高得点者：'+str(stus1))
-        elif maxs2 > maxs1:
-            print('合計学年最高得点者：'+str(stus2))
-        print('')
-        
-        #男女別で導出
-        for i in range(int(classroom1.student_list[18].student_id)):
-            mathm = mathM[i]
-            jpnm = jpnM[i]
-            totalm = totalM[i]
-            mathf = mathF[i]
-            jpnf = jpnF[i]
-            totalf = totalF[i]
-
-            if maxMathM < mathm or maxMathM == mathm:
-                maxMathM = mathm
-
-            if maxJpnM < jpnm or maxJpnM == jpnm:
-                maxJpnM = jpnm
-
-            if maxTotalM < totalm or maxTotalM == totalm:
-                maxTotalM = totalm
-
-            if maxMathF < mathf or maxMathF == mathf:
-                maxMathF = mathf
-
-            if maxJpnF < jpnf or maxJpnF == jpnf:
-                maxJpnF = jpnf
-
-            if maxTotalF < totalf or maxTotalF == totalf:
-                maxTotalF = totalf
-
-        for j in range(int(classroom1.student_list[18].student_id)):
-            mathm = mathM[j]
-            jpnm = jpnM[j]
-            totalm = totalM[j]
-            mathf = mathF[j]
-            jpnf = jpnF[j]
-            totalf = totalF[j]
-
-            if mathm == maxMathM:
-                stumM.append(stuam[j])
-
-            if jpnm == maxJpnM:
-                stujM.append(stuam[j])
-
-            if totalm == maxTotalM:
-                stusM.append(stuam[j])
-
-            if mathf == maxMathF:
-                stumF.append(stuaf[j])
-
-            if jpnf == maxJpnF:
-                stujF.append(stuaf[j])
-
-            if totalf == maxTotalF:
-                stusF.append(stuaf[j])
-
-        print('男子')
-        print('数学最高得点者：'+str(stumM))
-        print('国語最高得点者：'+str(stujM))
-        print('合計最高得点者：'+str(stusM))
-        print('')
-
-        print('女子')
-        print('数学最高得点者：'+str(stumF))
-        print('国語最高得点者：'+str(stujF))
-        print('合計最高得点者：'+str(stusF)) 
-    
+        return maxs2 
+ 
 if  __name__ == '__main__':
     main()
