@@ -6,6 +6,8 @@ import Q2_Q4
 import numpy as np
 import sort
 import Q2_Q3
+import re
+from natto import MeCab
 class Student(object):
 
     def __init__(self):
@@ -25,14 +27,15 @@ class Classroom(object):
         self.teacher_fm = None
 
 
-class teacher(object):
+class Teacher(object):
 
     def __init__(self):
-        self.classroom = None
-        self.teachername = None
+        self.room = None
+        self.name = None
         self.subject = None
         self.mail = None
-        self.intro = None
+        self.pmail = None
+        self.url = None
         self.telephone = None
 
 def read_csv(filename):
@@ -58,9 +61,25 @@ def read_csv(filename):
     classroom1.teacher_fm = teacher[4]##担任の性別
     return classroom1
     
+def read_txt(filename):
+    teacher = Teacher()
+    f1 = open(filename,"r")
+    line = f1.readlines() # 1行毎にファイル終端まで全て読む(改行文字も含まれる)
+    f1.close()# line :リスト。要素は1行の文字列データ
+    teacher.name = line[1]
+    teacher.room = line[3]
+    teacher.subject = line[5]
+    teacher.mail = line[7]
+    teacher.telephone = line[9]
+    teacher.profile = line[11]
+    teacher.url = line[13]
+    return teacher
+
 def main():
     classroom1=read_csv("1-1.csv")
     classroom2=read_csv("1-2.csv")
+    teacher1 = read_txt("mio.txt")
+    teacher2 = read_txt("taro.txt")
     kadai7_q2 = Q2_Q4.yomikomi()
     kadai7_q2.q2()
     kadai7_q5 = sort.sortman() 
@@ -96,25 +115,63 @@ def main():
             stuf1.append(math2 + jpn2)       
     ##学年全体の数学国語の合計点数のリストの制作
     sum1 =sum11 + sum12
-    
-    ##問５から問７まで
-    print ("")
-    kadai7_q5.q5(sum11,sum12)
-    print ("")
-    kadai7_q5.q6(sum1)
-    print ("")
-    kadai7_q5.q7(stum1,stuf1)
-    ##問8から問１０まで
-    print ("")
-    kadai7_q8.q8(sum11,sum12)
-    print ("")
-    kadai7_q8.q9(sum1)
-    print ("")
-    kadai7_q8.q10(stum1,stuf1)
     ##課題８問２から問３まで
-    print ("")
+    
     kadai8_q3.q2(sum11,sum12)
-    print("")
+    
     kadai8_q3.q3(sum11,sum12)
+
+    ##課題８の問４
+    name1 = teacher1.name
+    room1 = teacher1.room
+    subject1 = teacher1.subject
+    name2 = teacher2.name
+    room2 = teacher2.room
+    subject2 = teacher2.subject
+    print("先生の名前  " + name1)
+    print(name1 + "先生の担任  " + room1)
+    print(name1 + "先生の担当  " + subject1)
+    print("先生の名前  " + name2)
+    print(name2 + "先生の担任  " + room2)
+    print(name2 + "先生の担当  " + subject2)
+    ##課題８の問５
+    mail1 = teacher1.mail
+    m1 = q5(mail1)
+    print(m1)
+    mail2 = teacher2.mail
+    m2 = q5(mail2)
+    print(m2)
+    ##課題８の問６
+    phone1 = teacher1.telephone
+    p1 =  q6(phone1)
+    print(p1)
+    phone2 = teacher2.telephone
+    p2 = q6(phone2)
+    print(p2)
+    ##課題８の問７
+    url1 = teacher1.url
+    u1 = q7(url1)
+    print(u1)
+    url2 = teacher2.url
+    u2 = q7(url2)
+    print(u2)
+    ##課題8の問８
+    mc = Mecab()
+    profile1 = teacher1.profile
+    mc.parce(profile1)
+##課題８の問５
+def q5(add):
+    m = re.findall('[a-z]+\@[A-Za-z]+\.[a-zA-Z\.]+', add)
+    return m
+##課題8の問６
+def q6(phone):
+    p = re.findall('[0-9]{3}-?[0-9]{4}-?[0-9]{4}', phone)
+    return p
+##課題8の問７
+def q7(url):
+    u = re.findall('[a-z]{4}:/{2}[a-z\.\/]+',url)
+    return u
 if __name__ == '__main__':
     main()
+
+    
