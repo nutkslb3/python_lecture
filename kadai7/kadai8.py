@@ -7,6 +7,7 @@ import Q2_Q4
 import toukei
 import kadai7
 import sort
+import goukei
 
 class Teacher(object):
     def __init__(self):
@@ -47,46 +48,30 @@ def read_txt(filename):
 def main():
     mio = read_txt("mio.txt")
     taro = read_txt("taro.txt")
-    q2() 
+    q2_3() 
     print ("")
-    print (mio.name)
-    print (mio.class_)
-    print (mio.subject)
+    print (mio.name + mio.class_ + mio.subject )
     q5(mio.mailaddress)
     q6(mio.address)
     q7(mio.url)
     q8(mio.profile)
     q9("mio.txt")    
     print ("")   
-    print (taro.name)
-    print (taro.class_)
-    print (taro.subject)
+    print (taro.name + taro.class_ + taro.subject)
     q5(taro.mailaddress) 
     q6_t(taro.address)
     q7_t(taro.url)
     q8(taro.profile)
     q9("taro.txt")
 
-def q2():
+def q2_3():
     read = kadai7.readFile()
+    Goukei = goukei.goukeiman()
     classroom1 = read.read_csv("1-1.csv")
     classroom2 = read.read_csv("1-2.csv")
-    ##１組の各生徒の数学国語の合計点数のリストの制作
-    sum11 =[]
-    math1 = 0
-    jpn1 = 0
-    for i in range(int(classroom1.student_list[19].student_id)):
-        math1 = int(classroom1.student_list[i].math)
-        jpn1 = int(classroom1.student_list[i].japanese)
-        sum11.append(math1 + jpn1)
-    ##２組の各生徒の数学国語の合計点数のリストの制作
-    sum12 = []
-    math2 = 0
-    jpn2 = 0
-    for i in range(int(classroom2.student_list[17].student_id)):
-        math2 = int(classroom2.student_list[i].math)
-        jpn2 = int(classroom2.student_list[i].japanese)
-        sum12.append(math2 + jpn2)
+    sum11 = Goukei.goukei11(classroom1) 
+    sum12 = Goukei.goukei12(classroom2)
+
 
     ##問２
     print ("問２")
@@ -137,21 +122,6 @@ def q8(profile):
     m = MeCab.Tagger()
     m.parse('')
     print (m.parse(profile))
-    node = m.parseToNode(profile)
-    keywords = []
-    while node:
-        if node.feature.split(",")[0] == u"助詞":
-            keywords.append(node.surface)
-        elif node.feature.split(",")[0] == u"形容詞":
-             keywords.append(node.surface)
-        elif node.feature.split(",")[0] == u"副詞":
-             keywords.append(node.surface)
-        elif node.feature.split(",")[0] == u"助動詞":
-             keywords.append(node.surface)
-        elif node.feature.split(",")[0] == u"感動詞":
-             keywords.append(node.surface)
-        node = node.next
-    print (keywords)
     
 def q9(filename):
     m = MeCab.Tagger()
