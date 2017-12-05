@@ -1,13 +1,10 @@
-#!/usr/bin/env python
+
 # -*- coding:utf-8 -*-
 import csv
-import toukei
-import Q2_Q4
 import numpy as np
-import sort
 import Q2_Q3
 import re
-from natto import MeCab
+import MeCab
 class Student(object):
 
     def __init__(self):
@@ -80,10 +77,6 @@ def main():
     classroom2=read_csv("1-2.csv")
     teacher1 = read_txt("mio.txt")
     teacher2 = read_txt("taro.txt")
-    kadai7_q2 = Q2_Q4.yomikomi()
-    kadai7_q2.q2()
-    kadai7_q5 = sort.sortman() 
-    kadai7_q8 = toukei.Statman() 
     kadai8_q3 = Q2_Q3.question2()
     ##１組の各生徒の数学国語の合計点数のリストの制作
     stum1=[]##学年全体の男子合計点リスト
@@ -113,8 +106,6 @@ def main():
             stum1.append(math2 + jpn2)
         elif (s2=="F"):
             stuf1.append(math2 + jpn2)       
-    ##学年全体の数学国語の合計点数のリストの制作
-    sum1 =sum11 + sum12
     ##課題８問２から問３まで
     
     kadai8_q3.q2(sum11,sum12)
@@ -156,9 +147,20 @@ def main():
     u2 = q7(url2)
     print(u2)
     ##課題8の問８
-    mc = Mecab()
     profile1 = teacher1.profile
-    mc.parce(profile1)
+    kekka = q8(profile1)
+    print(kekka)
+    profile2 = teacher2.profile
+    keka = q8(profile2)
+    print(keka)
+    ##課題8の問９
+    habu = q9('mio.txt')
+    for w in habu:
+        print(w)
+    habuku = q9('taro.txt')
+    for i in habuku:
+        print(i)
+
 ##課題８の問５
 def q5(add):
     m = re.findall('[a-z]+\@[A-Za-z]+\.[a-zA-Z\.]+', add)
@@ -171,7 +173,25 @@ def q6(phone):
 def q7(url):
     u = re.findall('[a-z]{4}:/{2}[a-z\.\/]+',url)
     return u
-if __name__ == '__main__':
-    main()
 
-    
+##課題８の問8
+def q8(profile):
+    t = MeCab.Tagger('-Owakati')
+    kekka = t.parse(profile)
+    return kekka
+
+##課題８の問９
+def q9(text):
+    t = MeCab.Tagger()
+    txt = open(text,'r')
+    keyword = []
+    for line in txt:
+        node = t.parseToNode(line)
+        while node:
+            if node.feature.split(',')[0] != '名詞' and node.feature.split(',')[0] != '動詞':
+                keyword.append(node.surface)
+            node = node.next
+    txt.close()
+    return keyword
+if __name__ == '__main__':
+    main()    
